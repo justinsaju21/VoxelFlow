@@ -255,6 +255,18 @@ async function init() {
     // Hide loading overlay
     document.getElementById('loading-overlay').classList.add('hidden');
 
+    // Setup close banner button
+    const closeBannerBtn = document.getElementById('close-banner');
+    const instructionsBanner = document.getElementById('instructions-banner');
+    if (closeBannerBtn && instructionsBanner) {
+        closeBannerBtn.addEventListener('click', () => {
+            instructionsBanner.classList.add('hidden');
+            setTimeout(() => {
+                instructionsBanner.style.display = 'none';
+            }, 400); // Wait for animation to complete
+        });
+    }
+
     // Start animation loop
     animate();
 
@@ -447,7 +459,7 @@ function setupToolbar() {
                 // First click - Ask for confirmation
                 resetBtn.classList.add('confirming');
                 resetBtn.innerHTML = '❓'; // Question mark
-                
+
                 // Revert after 3s
                 resetTimeout = setTimeout(() => {
                     resetBtn.classList.remove('confirming');
