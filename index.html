@@ -4,118 +4,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voxel Editor - Hand Tracking</title>
-    <meta name="description" content="Interactive voxel editor with hand gesture controls using Three.js and MediaPipe">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
-    <!-- Stylesheet -->
+    <title>Voxel Editor | AI Hand Tracking</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Landing Page Specific Overrides */
+        body {
+            overflow-y: auto;
+            /* Allow scrolling on landing page */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .landing-container {
+            max-width: 1000px;
+            width: 90%;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.3));
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 48px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0a0a15;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+            margin-bottom: 80px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.6);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00d4ff;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        /* Background Animation */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #00d4ff;
+            top: -100px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #00ff88;
+            bottom: -50px;
+            right: -50px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(30px, 50px);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Toolbar -->
-    <div id="toolbar">
-        <div class="tool-group" id="color-palette">
-            <!-- Colors injected by JS -->
-        </div>
-        <div class="divider"></div>
-        <div class="toggle-wrapper">
-            <span>Gravity</span>
-            <label class="switch">
-                <input type="checkbox" id="gravity-toggle">
-                <span class="slider"></span>
-            </label>
-        </div>
-        <div class="divider"></div>
-        <button id="btn-reset" class="icon-btn" title="Clear All Blocks">
-            🗑️
-        </button>
-    </div>
 
-    <!-- Instructions Banner -->
-    <div id="instructions-banner">
-        <button id="close-banner" title="Close">✕</button>
-        <h2>👋 Welcome to Voxel Editor!</h2>
-        <p>Use your <strong>hand</strong> to create 3D voxel art in real-time.</p>
-        <div class="banner-controls">
-            <div class="control-item">
-                <span class="control-icon">✋</span>
-                <span><strong>Hold steady</strong> — Place a voxel</span>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <div class="landing-container">
+        <h1 class="hero-title">Voxel Editor</h1>
+        <p class="hero-subtitle">Create 3D art with your bare hands.<br>Powered by AI Hand Tracking & WebGL.</p>
+
+        <a href="app.html" class="cta-button">Enter Editor →</a>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon-circle">✋</div>
+                <h3>Start Building</h3>
+                <p><strong>Hold your hand steady</strong> for a moment to place a voxel. Move your hand to position the
+                    preview cursor.</p>
             </div>
-            <div class="control-item">
-                <span class="control-icon">🤏</span>
-                <span><strong>Pinch</strong> on a voxel — Remove it</span>
+
+            <div class="feature-card">
+                <div class="icon-circle">🤏</div>
+                <h3>Remove Blocks</h3>
+                <p><strong>Pinch</strong> your thumb and index finger while hovering over a block to delete it
+                    instantly.</p>
             </div>
-            <div class="control-item">
-                <span class="control-icon">👆</span>
-                <span><strong>Point at a face</strong> — Stack voxels</span>
+
+            <div class="feature-card">
+                <div class="icon-circle">👆</div>
+                <h3>Stack & Build</h3>
+                <p>Point at any <strong>face</strong> of an existing block to stack effortlessly. Gravity mode makes it
+                    even more fun!</p>
             </div>
-            <div class="control-item">
-                <span class="control-icon">🖱️</span>
-                <span><strong>Mouse drag</strong> — Orbit camera</span>
+
+            <div class="feature-card">
+                <div class="icon-circle">🎨</div>
+                <h3>Color & Control</h3>
+                <p>Use the on-screen toolbar to pick <strong>vibrant colors</strong> or toggle physics. Orbit the camera
+                    with your mouse.</p>
             </div>
         </div>
-        <p class="banner-tip">💡 Tip: Select colors from the toolbar & toggle gravity for physics!</p>
     </div>
 
-    <!-- Loading Overlay -->
-    <div id="loading-overlay">
-        <div class="loader"></div>
-        <div id="loading-text">Initializing Hand Tracking...</div>
-    </div>
-
-    <!-- Main 3D Container -->
-    <div id="container"></div>
-
-    <!-- Webcam Preview -->
-    <div id="webcam-container">
-        <video id="webcam" autoplay playsinline muted></video>
-    </div>
-
-    <!-- Status Panel -->
-    <div id="status-panel">
-        <h3>Hand Tracking</h3>
-        <div class="status-row">
-            <span class="status-label">Hand Detected</span>
-            <span id="hand-status" class="status-value inactive">No</span>
-        </div>
-        <div class="status-row">
-            <span class="status-label">Pinch</span>
-            <span id="pinch-status" class="status-value inactive">—</span>
-        </div>
-        <span id="fps-display" class="status-value">—</span>
-    </div>
-
-    <!-- Instructions Panel -->
-    <div id="instructions-panel">
-        <h3>Controls</h3>
-        <ul>
-            <li><strong>Hold steady</strong> to place voxel</li>
-            <li>Pinch on existing voxel to remove</li>
-            <li>Point at voxel face to stack</li>
-            <li>Mouse drag to orbit camera</li>
-        </ul>
-    </div>
-
-    <!-- Voxel Count -->
-    <div id="voxel-count">
-        <span id="count">0</span> voxels
-    </div>
-
-    <!-- Import Three.js and MediaPipe via ES Modules -->
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-        }
-    }
-    </script>
-
-    <!-- Main Application Logic -->
-    <script type="module" src="script.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voxel Editor - Hand Tracking</title>
+    <meta name="description" content="Interactive voxel editor with hand gesture controls using Three.js and MediaPipe">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Toolbar -->
+    <div id="toolbar">
+        <div class="tool-group" id="color-palette">
+            <!-- Colors injected by JS -->
+        </div>
+        <div class="divider"></div>
+        <div class="toggle-wrapper">
+            <span>Gravity</span>
+            <label class="switch">
+                <input type="checkbox" id="gravity-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="divider"></div>
+        <button id="btn-reset" class="icon-btn" title="Clear All Blocks">
+            🗑️
+        </button>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="loader"></div>
+        <div id="loading-text">Initializing Hand Tracking...</div>
+    </div>
+
+    <!-- Main 3D Container -->
+    <div id="container"></div>
+
+    <!-- Webcam Preview -->
+    <div id="webcam-container">
+        <video id="webcam" autoplay playsinline muted></video>
+    </div>
+
+    <!-- Status Panel -->
+    <div id="status-panel">
+        <h3>Hand Tracking</h3>
+        <div class="status-row">
+            <span class="status-label">Hand Detected</span>
+            <span id="hand-status" class="status-value inactive">No</span>
+        </div>
+        <div class="status-row">
+            <span class="status-label">Pinch</span>
+            <span id="pinch-status" class="status-value inactive">—</span>
+        </div>
+        <span id="fps-display" class="status-value">—</span>
+    </div>
+
+    <!-- Instructions Panel -->
+    <div id="instructions-panel">
+        <h3>Controls</h3>
+        <ul>
+            <li><strong>Hold steady</strong> to place voxel</li>
+            <li>Pinch on existing voxel to remove</li>
+            <li>Point at voxel face to stack</li>
+            <li>Mouse drag to orbit camera</li>
+        </ul>
+    </div>
+
+    <!-- Voxel Count -->
+    <div id="voxel-count">
+        <span id="count">0</span> voxels
+    </div>
+
+    <!-- Import Three.js and MediaPipe via ES Modules -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <!-- Main Application Logic -->
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
