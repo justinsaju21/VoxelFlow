@@ -40,5 +40,4 @@ An interactive 3D voxel editor controlled entirely by hand gestures using your w
 - **Reset button not working?** Refresh the page (Ctrl+Shift+R) to clear old cache.
 - **Hand not detected?** Ensure good lighting and that your hand is visible to the camera.
 
----
-*Created with ❤️ by Antigravity*
+
