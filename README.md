@@ -1,4 +1,4 @@
-# CubeStack VR - Hand Controlled Voxel Editor
+# VoxelFlow - Hand Controlled Voxel Editor
 
 An interactive 3D voxel editor controlled entirely by hand gestures using your webcam. Built with Three.js and Google MediaPipe.
 
