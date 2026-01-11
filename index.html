@@ -63,58 +63,119 @@
             box-shadow: 0 10px 40px rgba(0, 212, 255, 0.6);
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+        /* New Instructions Styling */
+        .instructions-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+            max-width: 1100px;
+            margin-bottom: 60px;
             text-align: left;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
-        @media (max-width: 768px) {
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
+        .mode-section {
+            flex: 1;
+            min-width: 320px;
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
+        .mode-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .mode-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
             padding: 30px;
+            height: 100%;
             transition: transform 0.3s ease;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(0, 212, 255, 0.3);
+        .mode-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .icon-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: rgba(0, 212, 255, 0.1);
+        .step {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 20px;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-icon {
+            font-size: 1.8rem;
+            min-width: 40px;
+            text-align: center;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            padding: 5px;
+        }
+
+        .step-text h4 {
             color: #00d4ff;
+            margin-bottom: 4px;
+            font-size: 1.1rem;
         }
 
-        .feature-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 10px;
-            color: white;
+        .step-text p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
-        .feature-card p {
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.6;
+        /* General Controls Section */
+        .general-controls {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .general-controls h3 {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .controls-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .control-pill {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .control-pill:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: scale(1.05);
         }
 
         /* Background Animation */
@@ -169,33 +230,69 @@
 
         <a href="app.html" class="cta-button">Enter Editor →</a>
 
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="icon-circle">✋</div>
-                <h3>Start Building</h3>
-                <p><strong>Hold your hand steady</strong> for a moment to place a voxel. Move your hand to position the
-                    preview cursor.</p>
+        <div class="instructions-container">
+            <div class="mode-section">
+                <h2>☝️ One-Handed Mode</h2>
+                <div class="mode-card">
+                    <div class="step">
+                        <span class="step-icon">🎯</span>
+                        <div class="step-text">
+                            <h4>Move Cursor</h4>
+                            <p>Move your hand to position the blue ghost voxel.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-icon">⏳</span>
+                        <div class="step-text">
+                            <h4>Place Block</h4>
+                            <p><strong>Hold steady</strong> for 1.5s. A ring will fill up to place.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-icon">🤏</span>
+                        <div class="step-text">
+                            <h4>Remove Block</h4>
+                            <p><strong>Pinch</strong> (thumb & index) while on a block to delete.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="feature-card">
-                <div class="icon-circle">🤏</div>
-                <h3>Remove Blocks</h3>
-                <p><strong>Pinch</strong> your thumb and index finger while hovering over a block to delete it
-                    instantly.</p>
+            <div class="mode-section">
+                <h2>👐 Two-Handed Mode</h2>
+                <div class="mode-card">
+                    <div class="step">
+                        <span class="step-icon">👉</span>
+                        <div class="step-text">
+                            <h4>Right Hand = Cursor</h4>
+                            <p>Use your <strong>Right Hand</strong> to move the position cursor.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-icon">⚡</span>
+                        <div class="step-text">
+                            <h4>Left Hand = Trigger</h4>
+                            <p>Use your <strong>Left Hand</strong> to control actions.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-icon">🤏</span>
+                        <div class="step-text">
+                            <h4>Pinch to Action</h4>
+                            <p><strong>Pinch with Left Hand</strong> to Place (on empty) or Remove (on block).</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="feature-card">
-                <div class="icon-circle">👆</div>
-                <h3>Stack & Build</h3>
-                <p>Point at any <strong>face</strong> of an existing block to stack effortlessly. Gravity mode makes it
-                    even more fun!</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-circle">🎨</div>
-                <h3>Color & Control</h3>
-                <p>Use the on-screen toolbar to pick <strong>vibrant colors</strong> or toggle physics. Orbit the camera
-                    with your mouse.</p>
+        <div class="general-controls">
+            <h3>🎮 General Controls</h3>
+            <div class="controls-grid">
+                <div class="control-pill">🖱️ Mouse Drag to Orbit</div>
+                <div class="control-pill">👆 Point at Face to Stack</div>
+                <div class="control-pill">🎨 Toolbar for Colors</div>
+                <div class="control-pill">🌑 Physics Gravity Toggle</div>
             </div>
         </div>
     </div>
